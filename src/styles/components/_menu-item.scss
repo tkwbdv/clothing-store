@@ -9,10 +9,6 @@
   margin: 0 7.5px 15px;
   overflow: hidden;
 
-  &.large {
-    height: 380px;
-  }
-
   &:hover {
     cursor: pointer;
 
@@ -26,14 +22,6 @@
       transition: opacity 0.25s ease-in;
     }
   }
-
-  // &:first-child {
-  //   margin-right: 7.5px;
-  // }
-
-  // &:last-child {
-  //   margin-left: 7.5px;
-  // }
 
   .background-image {
     background-position: center;
@@ -65,5 +53,17 @@
       font-weight: lighter;
       font-size: 16px;
     }
+  }
+
+  @media (max-width: 700px) {
+    width: 100%;
+
+    &.large {
+      width: 100%;
+    }
+  }
+
+  &.large {
+    height: 380px;
   }
 }
