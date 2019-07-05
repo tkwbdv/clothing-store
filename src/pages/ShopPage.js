@@ -4,9 +4,11 @@ import SHOP_DATA from "../data/shop-data";
 
 const ShopPage = () => (
   <div className="shop-page">
-    {SHOP_DATA.map(({ title, items, id }) => (
-      <CollectionPreview title={title} items={items} key={id} />
-    ))}
+    {
+      SHOP_DATA.map(({ id, ...otherCollectionProps }) => (
+        <CollectionPreview key={id} {...otherCollectionProps} />
+      ))
+    }
   </div>
 );
 
