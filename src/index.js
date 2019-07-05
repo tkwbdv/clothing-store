@@ -5,14 +5,18 @@ import { Switch, Route } from "react-router-dom";
 
 import HomePage from "./pages/HomePage";
 import ShopPage from "./pages/ShopPage";
+import Header from "./components/Header";
 
 import "./styles/styles.scss";
 
 const App = () => (
-  <Switch>
-    <Route path={"/"} component={HomePage} exact />
-    <Route path={"/shop"} component={ShopPage} />
-  </Switch>
+  <div>
+    <Header />
+    <Switch>
+      <Route path={"/"} component={HomePage} exact />
+      <Route path={"/shop"} component={ShopPage} />
+    </Switch>
+  </div>
 );
 
 ReactDOM.render(
