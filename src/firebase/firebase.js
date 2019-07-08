@@ -12,6 +12,31 @@ const firebaseConfig = {
   appId: process.env.REACT_APP_FIREBASE_APP_ID
 };
 
+const createUserProfileDocument = async (userAuth, additionalData) => {
+  if (!userAuth) return;
+
+  const userRef = firestore.doc(`users/${userAuth.uid}`);
+  const snapshot = await userRef.get();
+
+  if (!snapshot.exists) {
+    const { displayName, email } = userAuth;
+    const createdAt = new Date();
+
+    try {
+      await userRef.set({
+        displayName,
+        email,
+        createdAt,
+        ...additionalData
+      });
+    } catch (error) {
+      console.log("error creating user", error.message);
+    }
+  }
+
+  return userRef;
+}
+
 firebase.initializeApp(firebaseConfig);
 
 const firestore = firebase.firestore();
@@ -20,4 +45,4 @@ const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
 const signInWithGoogle = () => firebase.auth().signInWithPopup(googleAuthProvider)
   .catch(error => new Error(error.message));
 
-export { firebase, signInWithGoogle, firestore as default };
+export { firebase, signInWithGoogle, firestore, createUserProfileDocument };

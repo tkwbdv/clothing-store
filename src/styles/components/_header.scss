@@ -22,8 +22,8 @@
   .option {
     padding: 1rem 0.5rem;
     font-size: 2rem;
-    // transition: all 2s ease-in-out;
-    border-bottom: none;
+    border-bottom: 1px solid transparent;
+    transition: all 0.15s ease-in;
 
     &:hover {
       border-bottom: 1px solid black;
