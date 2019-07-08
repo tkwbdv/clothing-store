@@ -1,14 +1,14 @@
 .header {
-  height: 70px;
+  height: 7rem;
   width: 100%;
   display: flex;
   justify-content: space-between;
-  margin-bottom: 25px;
+  margin-bottom: 2.5rem;
 
   .logo-container {
     height: 100%;
-    width: 70px;
-    padding: 25px;
+    width: 7rem;
+    padding: 2.5rem;
   }
 
   .options-container {
@@ -20,6 +20,13 @@
   }
 
   .option {
-    padding: 10px 15px;
+    padding: 1rem 0.5rem;
+    font-size: 2rem;
+    // transition: all 2s ease-in-out;
+    border-bottom: none;
+
+    &:hover {
+      border-bottom: 1px solid black;
+    }
   }
 }
