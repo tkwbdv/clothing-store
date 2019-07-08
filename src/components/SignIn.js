@@ -28,14 +28,14 @@ const SignIn = () => {
         <FormInput
           name="email"
           type="email"
-          label="email"
+          label="Email"
           handleChange={handleChange}
           value={email}
           required />
         <FormInput
           name="password"
           type="password"
-          label="password"
+          label="Password"
           handleChange={handleChange}
           value={password}
           required />
