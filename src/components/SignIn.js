@@ -21,6 +21,11 @@ const SignIn = ({ history }) => {
     }
   }
 
+  const handleSignInWithGoogle = async () => {
+    await signInWithGoogle();
+    history.push("/");
+  }
+
   const handleChange = (e) => {
     const { value, name } = e.target;
     name === "email" ? setEmail(value) : setPassword(value);
@@ -50,7 +55,7 @@ const SignIn = ({ history }) => {
           <CustomButton type="submit">
             Sign In
           </CustomButton>
-          <CustomButton onClick={signInWithGoogle} isGoogleSignIn>
+          <CustomButton onClick={handleSignInWithGoogle} isGoogleSignIn>
             Sign In With Google
           </CustomButton>
         </div>

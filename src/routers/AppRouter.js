@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Switch, Route } from "react-router-dom";
+import { connect } from "react-redux";
 import { firebase, createUserProfileDocument } from "../firebase/firebase";
+import { setCurrentUser } from "../actions/userActions";
 
 import HomePage from "../pages/HomePage";
 import ShopPage from "../pages/ShopPage";
 import SignInSignUpPage from "../pages/SignInSignUpPage";
 import Header from "../components/Header";
 
-const AppRouter = () => {
-  const [currentUser, setCurrentUser] = useState(null);
-
+const AppRouter = ({ setCurrentUser }) => {
   useEffect(() => {
     const unsubscribeFromAuth = firebase.auth().onAuthStateChanged(async userAuth => {
       if (userAuth) {
@@ -21,15 +21,15 @@ const AppRouter = () => {
             ...snapshot.data()
           });
         });
-      } else setCurrentUser(null);
+      } else setCurrentUser({});
     });
 
     return () => unsubscribeFromAuth();
-  }, []);
+  }, [setCurrentUser]);
 
   return (
-    <div>
-      <Header currentUser={currentUser} />
+    <div className="main-container">
+      <Header />
       <Switch>
         <Route path={"/"} component={HomePage} exact />
         <Route path={"/shop"} component={ShopPage} />
@@ -39,4 +39,8 @@ const AppRouter = () => {
   );
 }
 
-export default AppRouter;
+const mapDispatchToProps = (dispatch) => ({
+  setCurrentUser: (userData) => dispatch(setCurrentUser(userData))
+});
+
+export default connect(undefined, mapDispatchToProps)(AppRouter);

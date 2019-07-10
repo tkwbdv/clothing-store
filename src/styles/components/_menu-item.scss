@@ -55,7 +55,7 @@
     }
   }
 
-  @media (max-width: 70rem) {
+  @media (max-width: $mobile-breakpoint) {
     width: 100%;
 
     &.large {

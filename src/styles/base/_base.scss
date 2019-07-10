@@ -26,7 +26,11 @@ span {
   font-size: 2rem;
 }
 
-#root {
-  margin: 0 auto;
-  width: 75vw;
+.main-container {
+  padding: 0 10rem;
+  max-width: 85vw;
+
+  @media (max-width: 70rem) {
+    padding: 0;
+  }
 }

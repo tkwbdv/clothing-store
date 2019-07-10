@@ -1,7 +1,14 @@
 .sing-in-signup {
   width: 85rem;
   display: flex;
-  align-items: flex-start;
+  // align-items: flex-start;
   justify-content: space-between;
-  margin: 3rem auto;
+  justify-items: center;
+  margin: 5rem auto;
+
+  @media (max-width: $mobile-breakpoint) {
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+  }
 }
