@@ -1,17 +1,24 @@
 import React, { useState } from "react";
-import { signInWithGoogle } from "../firebase/firebase";
+import { withRouter } from "react-router-dom";
+import { firebase, signInWithGoogle } from "../firebase/firebase";
 import FormInput from "./FormInput";
 import CustomButton from "./CustomButton";
 
-const SignIn = () => {
+const SignIn = ({ history }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    setEmail("");
-    setPassword("");
+    try {
+      await firebase.auth().signInWithEmailAndPassword(email, password);
+      setEmail("");
+      setPassword("");
+      history.push("/");
+    } catch (error) {
+      console.error("error signing in", error);
+    }
   }
 
   const handleChange = (e) => {
@@ -52,4 +59,4 @@ const SignIn = () => {
   );
 }
 
-export default SignIn;
+export default withRouter(SignIn);
