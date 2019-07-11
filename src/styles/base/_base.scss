@@ -16,6 +16,7 @@ body {
 a {
   text-decoration: none;
   color: black;
+  outline: none;
 }
 
 h2 {
@@ -27,8 +28,8 @@ span {
 }
 
 .main-container {
-  padding: 0 10rem;
-  max-width: 85vw;
+  max-width: 75vw;
+  margin: 0 12.5vw;
 
   @media (max-width: 70rem) {
     padding: 0;
