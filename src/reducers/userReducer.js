@@ -1,14 +1,16 @@
-const INITIAL_STATE = {};
+import { types } from "../actions/userActions";
+
+const INITIAL_STATE = null;
 
 const userReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case "SET_CURRENT_USER":
-      if (!action.userData.id) {
-        return action.userData;
+    case types.SET_CURRENT_USER:
+      if (action.payload === null) {
+        return null;
       } else {
         return {
           ...state,
-          ...action.userData
+          ...action.payload
         };
       }
     default:

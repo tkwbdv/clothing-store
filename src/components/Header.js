@@ -20,7 +20,7 @@ const Header = ({ currentUser }) => {
         <Link className="option" to="/shop">
           CONTACT
       </Link>
-        {!!currentUser.id
+        {!!currentUser
           ? <Link className="option" to="/" onClick={signOut}>
             SIGN OUT
           </Link>

@@ -21,7 +21,7 @@ const AppRouter = ({ setCurrentUser }) => {
             ...snapshot.data()
           });
         });
-      } else setCurrentUser({});
+      } else setCurrentUser(null);
     });
 
     return () => unsubscribeFromAuth();
@@ -33,7 +33,7 @@ const AppRouter = ({ setCurrentUser }) => {
       <Switch>
         <Route path={"/"} component={HomePage} exact />
         <Route path={"/shop"} component={ShopPage} />
-        <Route path={"/signin"} component={SignInSignUpPage} />
+        <Route path={"/signin"} component={SignInSignUpPage} exact />
       </Switch>
     </div>
   );
