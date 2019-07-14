@@ -8,11 +8,11 @@
   .logo-container {
     height: 100%;
     width: 7rem;
-    padding: 2.5rem;
+    padding: 2.5rem 1.5rem;
   }
 
   .options-container {
-    width: 50%;
+    width: 70%;
     height: 100%;
     display: flex;
     align-items: center;
@@ -28,5 +28,9 @@
     &:hover {
       border-bottom: 1px solid black;
     }
+  }
+
+  @media (max-width: $mobile-breakpoint) {
+    justify-content: center;
   }
 }

@@ -29,10 +29,19 @@ span {
 
 .main-container {
   position: relative;
+  min-width: 35rem;
   max-width: 75vw;
   margin: 0 12.5vw;
+}
 
-  @media (max-width: 70rem) {
+@media (max-width: $mobile-breakpoint) {
+  body {
+    padding: 2rem 0;
+  }
+
+  .main-container {
+    margin: 0;
+    max-width: 100vw;
     padding: 0;
   }
 }
