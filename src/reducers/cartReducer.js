@@ -7,11 +7,13 @@ const INITIAL_STATE = {
 
 const cartReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
+
     case types.TOGGLE_CART_HIDDEN:
       return {
         ...state,
         hidden: !state.hidden
       };
+
     case types.ADD_ITEM:
       const itemIndex = state.cartItems.findIndex(item => item.id === action.payload.id);
 
@@ -32,6 +34,7 @@ const cartReducer = (state = INITIAL_STATE, action) => {
           cartItems: newCartItems
         };
       }
+
     default:
       return state;
   }
