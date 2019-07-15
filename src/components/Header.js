@@ -7,6 +7,8 @@ import CartIcon from "./CartIcon";
 import CartDropdown from "./CartDropdown";
 
 import { ReactComponent as Logo } from "../assets/logo.svg";
+import { selectCartHidden } from "../selectors/cartSelectors";
+import { selectCurrentUser } from "../selectors/userSelectors";
 
 const Header = ({ currentUser, isCartHidden }) => {
   const signOut = () => firebase.auth().signOut();
@@ -39,8 +41,8 @@ const Header = ({ currentUser, isCartHidden }) => {
 }
 
 const mapStateToProps = state => ({
-  currentUser: state.currentUser,
-  isCartHidden: state.cart.hidden
+  currentUser: selectCurrentUser(state),
+  isCartHidden: selectCartHidden(state)
 });
 
 export default connect(mapStateToProps)(Header);
