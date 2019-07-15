@@ -1,6 +1,8 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
+
 import SignIn from "../components/SignIn";
 import SignUp from "../components/SignUp";
 
@@ -23,8 +25,8 @@ const SignInSignUpPage = ({ currentUser }) => {
   }
 }
 
-const mapStateToProps = state => ({
-  currentUser: selectCurrentUser(state)
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser
 });
 
 export default connect(mapStateToProps)(SignInSignUpPage);
