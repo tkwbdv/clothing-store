@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 import SignIn from "../components/SignIn";
 import SignUp from "../components/SignUp";
 
+import { selectCurrentUser } from "../selectors/userSelectors";
+
 const SignInSignUpPage = ({ currentUser }) => {
   if (currentUser) {
     return (
@@ -22,7 +24,7 @@ const SignInSignUpPage = ({ currentUser }) => {
 }
 
 const mapStateToProps = state => ({
-  currentUser: state.currentUser
+  currentUser: selectCurrentUser(state)
 });
 
 export default connect(mapStateToProps)(SignInSignUpPage);
