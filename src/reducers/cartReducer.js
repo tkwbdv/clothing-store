@@ -1,4 +1,5 @@
 import { types } from "../actions/cartActions";
+import { addItemToCart, removeItemFromCart } from "./cartUtils";
 
 const INITIAL_STATE = {
   hidden: true,
@@ -15,25 +16,24 @@ const cartReducer = (state = INITIAL_STATE, action) => {
       };
 
     case types.ADD_ITEM:
-      const itemIndex = state.cartItems.findIndex(item => item.id === action.payload.id);
+      return {
+        ...state,
+        cartItems: addItemToCart(state.cartItems, action.payload)
+      };
 
-      if (itemIndex < 0) {  // not already in cart
-        const newItem = {
-          ...action.payload,
-          quantity: 1
-        };
-        return {
-          ...state,
-          cartItems: [...state.cartItems, newItem]
-        };
-      } else {  // already in cart
-        const newCartItems = [...state.cartItems];
-        newCartItems[itemIndex].quantity++;
-        return {
-          ...state,
-          cartItems: newCartItems
-        };
-      }
+    case types.REMOVE_ITEM:
+      return {
+        ...state,
+        cartItems: removeItemFromCart(state.cartItems, action.payload)
+      };
+
+    case types.CLEAR_ITEM_FROM_CART:
+      return {
+        ...state,
+        cartItems: state.cartItems.filter(
+          cartItem => cartItem.id !== action.payload.id
+        )
+      };
 
     default:
       return state;
