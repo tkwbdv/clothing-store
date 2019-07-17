@@ -6,7 +6,7 @@ import { PersistGate } from "redux-persist/integration/react";
 
 import { store, persistor } from "./redux/configureStore";
 import AppRouter from "./routers/AppRouter"
-import "normalize.css";
+// import "normalize.css";
 import "./styles/styles.scss";
 
 ReactDOM.render(

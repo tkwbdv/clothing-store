@@ -1,5 +1,5 @@
-export default [
-  {
+const SHOP_DATA = {
+  hats: {
     id: 1,
     title: "Hats",
     routeName: "hats",
@@ -43,7 +43,7 @@ export default [
       {
         id: 7,
         name: "Red Beanie",
-        imageUrl: "h/images/shop/hats/red-beanie.png",
+        imageUrl: "/images/shop/hats/red-beanie.png",
         price: 18
       },
       {
@@ -60,7 +60,7 @@ export default [
       }
     ]
   },
-  {
+  sneakers: {
     id: 2,
     title: "Sneakers",
     routeName: "sneakers",
@@ -115,7 +115,7 @@ export default [
       }
     ]
   },
-  {
+  jackets: {
     id: 3,
     title: "Jackets",
     routeName: "jackets",
@@ -152,7 +152,7 @@ export default [
       }
     ]
   },
-  {
+  womens: {
     id: 4,
     title: "Womens",
     routeName: "womens",
@@ -201,7 +201,7 @@ export default [
       }
     ]
   },
-  {
+  mens: {
     id: 5,
     title: "Mens",
     routeName: "mens",
@@ -244,4 +244,6 @@ export default [
       }
     ]
   }
-];
+};
+
+export default SHOP_DATA;

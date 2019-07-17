@@ -1,8 +1,8 @@
 .collection-item {
+  width: 22vw;
   display: flex;
-  width: 22%;
   flex-direction: column;
-  height: 35rem;
+  height: 350px;
   align-items: center;
   position: relative;
 
@@ -16,8 +16,9 @@
 
   .custom-button {
     width: 80%;
-    top: 25.5rem;
+    opacity: 0.7;
     position: absolute;
+    top: 255px;
     display: none;
   }
 
@@ -37,6 +38,15 @@
     height: 5%;
     display: flex;
     justify-content: space-between;
-    font-size: 1.8rem;
+    font-size: 18px;
+
+    .name {
+      width: 90%;
+      margin-bottom: 15px;
+    }
+
+    .price {
+      width: 10%;
+    }
   }
 }

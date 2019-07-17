@@ -30,7 +30,7 @@ const AppRouter = ({ setCurrentUser }) => {
   }, [setCurrentUser]);
 
   return (
-    <div className="main-container">
+    <div>
       <Header />
       <Switch>
         <Route path={"/"} component={HomePage} exact />
