@@ -21,7 +21,7 @@ const CartDropdown = ({ cartItems, history, dispatch }) => {
           {cartItems
             .map(item => <CartItem key={item.id} item={item} />)}
         </div>) :
-        <div className="cart-empty">
+        <div className="empty-message">
           <span>Your cart is empty</span>
         </div>}
       <CustomButton onClick={handleRedirect}>GO TO CHECKOUT</CustomButton>
