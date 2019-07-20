@@ -4,11 +4,17 @@ import { firebase, signInWithGoogle } from "../firebase/firebase";
 import FormInput from "./FormInput";
 import CustomButton from "./CustomButton";
 
+import {
+  ButtonsBarContainer,
+  SignInTitle,
+  SignInContainer
+} from "../styles/components/_SignIn";
+
 const SignIn = ({ history }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault();
 
     try {
@@ -19,21 +25,21 @@ const SignIn = ({ history }) => {
     } catch (error) {
       console.error("error signing in", error);
     }
-  }
+  };
 
   const handleSignInWithGoogle = async () => {
     await signInWithGoogle();
     history.push("/");
-  }
+  };
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     const { value, name } = e.target;
     name === "email" ? setEmail(value) : setPassword(value);
-  }
+  };
 
   return (
-    <div className="sign-in">
-      <h2 className="title">I already have an account</h2>
+    <SignInContainer>
+      <SignInTitle>I already have an account</SignInTitle>
       <span>Sign in with your email and password</span>
 
       <form onSubmit={handleSubmit}>
@@ -43,25 +49,25 @@ const SignIn = ({ history }) => {
           label="Email"
           handleChange={handleChange}
           value={email}
-          required />
+          required
+        />
         <FormInput
           name="password"
           type="password"
           label="Password"
           handleChange={handleChange}
           value={password}
-          required />
-        <div className="buttons">
-          <CustomButton type="submit">
-            Sign In
-          </CustomButton>
+          required
+        />
+        <ButtonsBarContainer>
+          <CustomButton type="submit">Sign In</CustomButton>
           <CustomButton onClick={handleSignInWithGoogle} isGoogleSignIn>
             Sign In With Google
           </CustomButton>
-        </div>
+        </ButtonsBarContainer>
       </form>
-    </div>
+    </SignInContainer>
   );
-}
+};
 
 export default withRouter(SignIn);

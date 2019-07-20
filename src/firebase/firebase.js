@@ -45,14 +45,17 @@ const createUserProfileDocument = async (userAuth, additionalData) => {
   }
 
   return userRef;
-}
+};
 
 firebase.initializeApp(firebaseConfig);
 
 const firestore = firebase.firestore();
 const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
 
-const signInWithGoogle = () => firebase.auth().signInWithPopup(googleAuthProvider)
-  .catch(error => new Error(error.message));
+const signInWithGoogle = () =>
+  firebase
+    .auth()
+    .signInWithPopup(googleAuthProvider)
+    .catch(error => new Error(error.message));
 
 export { firebase, signInWithGoogle, firestore, createUserProfileDocument };

@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 
@@ -11,33 +10,40 @@ import { ReactComponent as Logo } from "../assets/logo.svg";
 import { selectCartHidden } from "../selectors/cartSelectors";
 import { selectCurrentUser } from "../selectors/userSelectors";
 
+import {
+  HeaderContainer,
+  LogoContainer,
+  OptionsContainer,
+  OptionLink,
+} from "../styles/components/_Header";
+
 const Header = ({ currentUser, isCartHidden }) => {
   const signOut = () => firebase.auth().signOut();
 
   return (
-    <div className="header">
-      <Link className="logo-container" to="/">
+    <HeaderContainer>
+      <LogoContainer to="/">
         <Logo className="logo" />
-      </Link>
-      <div className="options">
-        <Link className="option" to="/shop">
+      </LogoContainer>
+      <OptionsContainer>
+        <OptionLink to="/shop">
           SHOP
-      </Link>
-        <Link className="option" to="/shop">
+        </OptionLink>
+        <OptionLink to="/shop">
           CONTACT
-      </Link>
+        </OptionLink>
         {!!currentUser
-          ? <Link className="option" to="/" onClick={signOut}>
+          ? <OptionLink as="div" to="/" onClick={signOut}>
             SIGN OUT
-          </Link>
-          : <Link className="option" to="/signin">
+          </OptionLink>
+          : <OptionLink to="/signin">
             SIGN IN
-          </Link>
+          </OptionLink>
         }
         <CartIcon />
-      </div>
+      </OptionsContainer>
       {!isCartHidden && <CartDropdown />}
-    </div>
+    </HeaderContainer>
   );
 }
 

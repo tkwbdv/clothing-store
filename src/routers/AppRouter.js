@@ -13,18 +13,20 @@ import Header from "../components/Header";
 
 const AppRouter = ({ setCurrentUser }) => {
   useEffect(() => {
-    const unsubscribeFromAuth = firebase.auth().onAuthStateChanged(async userAuth => {
-      if (userAuth) {
-        const userRef = await createUserProfileDocument(userAuth);
+    const unsubscribeFromAuth = firebase
+      .auth()
+      .onAuthStateChanged(async userAuth => {
+        if (userAuth) {
+          const userRef = await createUserProfileDocument(userAuth);
 
-        userRef.onSnapshot(snapshot => {
-          setCurrentUser({
-            id: snapshot.id,
-            ...snapshot.data()
+          userRef.onSnapshot(snapshot => {
+            setCurrentUser({
+              id: snapshot.id,
+              ...snapshot.data()
+            });
           });
-        });
-      } else setCurrentUser(null);
-    });
+        } else setCurrentUser(null);
+      });
 
     return () => unsubscribeFromAuth();
   }, [setCurrentUser]);
@@ -40,10 +42,13 @@ const AppRouter = ({ setCurrentUser }) => {
       </Switch>
     </div>
   );
-}
+};
 
-const mapDispatchToProps = (dispatch) => ({
-  setCurrentUser: (userData) => dispatch(setCurrentUser(userData))
+const mapDispatchToProps = dispatch => ({
+  setCurrentUser: userData => dispatch(setCurrentUser(userData))
 });
 
-export default connect(undefined, mapDispatchToProps)(AppRouter);
+export default connect(
+  undefined,
+  mapDispatchToProps
+)(AppRouter);

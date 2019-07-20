@@ -8,6 +8,8 @@ import SignUp from "../components/SignUp";
 
 import { selectCurrentUser } from "../selectors/userSelectors";
 
+import { SignInAndSignUpContainer } from "../styles/pages/_SignInSignUpPage";
+
 const SignInSignUpPage = ({ currentUser }) => {
   if (currentUser) {
     return (
@@ -17,13 +19,13 @@ const SignInSignUpPage = ({ currentUser }) => {
     );
   } else {
     return (
-      <div className="sing-in-signup" >
+      <SignInAndSignUpContainer>
         <SignIn />
         <SignUp />
-      </div >
+      </SignInAndSignUpContainer>
     );
   }
-}
+};
 
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser

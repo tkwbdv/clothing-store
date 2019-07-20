@@ -5,21 +5,26 @@ import CollectionItem from "../components/CollectionItem";
 
 import { selectCollection } from "../selectors/shopSelectors";
 
+import {
+  CollectionPageContainer,
+  CollectionPageTitle,
+  CollectionPageItems
+} from "../styles/pages/_CollectionPage";
+
 const CollectionPage = ({ collection }) => {
   const { title, items } = collection;
 
   return (
-    <div className="collection-page">
-      <h2 className="title">{title}</h2>
-      <div className="items">
-        {items
-          .map(item => (
-            <CollectionItem key={item.id} item={item} />
-          ))}
-      </div>
-    </div>
+    <CollectionPageContainer>
+      <CollectionPageTitle>{title}</CollectionPageTitle>
+      <CollectionPageItems>
+        {items.map(item => (
+          <CollectionItem key={item.id} item={item} />
+        ))}
+      </CollectionPageItems>
+    </CollectionPageContainer>
   );
-}
+};
 
 const mapStateToProps = (state, ownProps) => ({
   collection: selectCollection(ownProps.match.params.collectionId)(state)

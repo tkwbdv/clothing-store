@@ -3,39 +3,34 @@ import { connect } from "react-redux";
 
 import { clearItemFromCart, removeItem, addItem } from "../actions/cartActions";
 
+import {
+  CheckoutItemContainer,
+  ImageContainer,
+  TextContainer,
+  QuantityContainer,
+  RemoveButtonContainer
+} from "../styles/components/_CheckoutItem";
+
 const CheckoutItem = ({ item, clearItemFromCart, removeItem, addItem }) => {
   const { imageUrl, name, quantity, price } = item;
   return (
-    <div className="checkout-item">
-      <div className="image-container">
+    <CheckoutItemContainer>
+      <ImageContainer>
         <img src={imageUrl} alt="item" />
-      </div>
-      <span className="name">{name}</span>
-      <span className="quantity">
-        <div
-          className="arrow"
-          onClick={() => removeItem(item)}
-        >
-          &#10094;
-        </div>
-        <span className="value">{quantity}</span>
-        <div
-          className="arrow"
-          onClick={() => addItem(item)}
-        >
-          &#10095;
-        </div>
-      </span>
-      <span className="price">${price}</span>
-      <div
-        className="remove-button"
-        onClick={() => clearItemFromCart(item)}
-      >
+      </ImageContainer>
+      <TextContainer>{name}</TextContainer>
+      <QuantityContainer>
+        <div onClick={() => removeItem(item)}>&#10094;</div>
+        <span>{quantity}</span>
+        <div onClick={() => addItem(item)}>&#10095;</div>
+      </QuantityContainer>
+      <TextContainer>${price}</TextContainer>
+      <RemoveButtonContainer onClick={() => clearItemFromCart(item)}>
         &#10005;
-    </div>
-    </div>
+      </RemoveButtonContainer>
+    </CheckoutItemContainer>
   );
-}
+};
 
 const mapDispatchToProps = dispatch => ({
   clearItemFromCart: item => dispatch(clearItemFromCart(item)),
@@ -43,4 +38,7 @@ const mapDispatchToProps = dispatch => ({
   addItem: item => dispatch(addItem(item))
 });
 
-export default connect(undefined, mapDispatchToProps)(CheckoutItem);
+export default connect(
+  undefined,
+  mapDispatchToProps
+)(CheckoutItem);

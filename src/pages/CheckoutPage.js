@@ -8,41 +8,47 @@ import { selectCartTotal } from "../selectors/cartSelectors";
 import CheckoutItem from "../components/CheckoutItem";
 import StripeCheckoutButton from "../components/StripeCheckoutButton";
 
-const CheckoutPage = ({ cartItems, cartTotal }) => (
-  <div className="checkout-page">
-    <div className="checkout-header">
-      <div className="header-block">
-        <span>Product</span>
-      </div>
-      <div className="header-block">
-        <span>Description</span>
-      </div>
-      <div className="header-block">
-        <span>Quantity</span>
-      </div>
-      <div className="header-block">
-        <span>Price</span>
-      </div>
-      <div className="header-block">
-        <span>Remove</span>
-      </div>
-    </div>
-    {
-      cartItems
-        .map(item =>
-          <CheckoutItem key={item.id} item={item} />)
-    }
+import {
+  CheckoutPageContainer,
+  CheckoutHeaderContainer,
+  HeaderBlockContainer,
+  TotalContainer,
+  WarningContainer
+} from "../styles/pages/_CheckoutPage";
 
-    <div className="total">
+const CheckoutPage = ({ cartItems, cartTotal }) => (
+  <CheckoutPageContainer>
+    <CheckoutHeaderContainer>
+      <HeaderBlockContainer>
+        <span>Product</span>
+      </HeaderBlockContainer>
+      <HeaderBlockContainer>
+        <span>Description</span>
+      </HeaderBlockContainer>
+      <HeaderBlockContainer>
+        <span>Quantity</span>
+      </HeaderBlockContainer>
+      <HeaderBlockContainer>
+        <span>Price</span>
+      </HeaderBlockContainer>
+      <HeaderBlockContainer>
+        <span>Remove</span>
+      </HeaderBlockContainer>
+    </CheckoutHeaderContainer>
+    {cartItems.map(item => (
+      <CheckoutItem key={item.id} item={item} />
+    ))}
+
+    <TotalContainer>
       <span>TOTAL: ${cartTotal}</span>
-    </div>
-    <div className="test-warning">
+    </TotalContainer>
+    <WarningContainer>
       *Please use the following test credit card for payments*
       <br />
       Number: 4242 4242 4242 4242 - Exp: 10 / 20 - CVC: 123
-    </div>
+    </WarningContainer>
     <StripeCheckoutButton price={cartTotal} />
-  </div>
+  </CheckoutPageContainer>
 );
 
 const mapStateToProps = createStructuredSelector({

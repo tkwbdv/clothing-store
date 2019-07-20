@@ -3,13 +3,15 @@ import { firebase, createUserProfileDocument } from "../firebase/firebase";
 import FormInput from "./FormInput";
 import CustomButton from "./CustomButton";
 
+import { SignUpContainer, SignUpTitle } from "../styles/components/_SignUp";
+
 const SignUp = () => {
   const [displayName, setDisplayName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault();
 
     if (password !== confirmPassword) {
@@ -18,20 +20,21 @@ const SignUp = () => {
     }
 
     try {
-      const { user } = await firebase.auth().createUserWithEmailAndPassword(email, password);
+      const { user } = await firebase
+        .auth()
+        .createUserWithEmailAndPassword(email, password);
       await createUserProfileDocument(user, { displayName });
 
       setDisplayName("");
       setEmail("");
       setPassword("");
       setConfirmPassword("");
-
     } catch (error) {
       console.error(error);
     }
-  }
+  };
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     const { name, value } = e.target;
     switch (name) {
       case "displayName":
@@ -45,11 +48,11 @@ const SignUp = () => {
       default:
         return;
     }
-  }
+  };
 
   return (
-    <div className="sign-up">
-      <h2 className="title">I do not have an account</h2>
+    <SignUpContainer>
+      <SignUpTitle>I do not have an account</SignUpTitle>
       <span>Sign up with your email and password</span>
       <form className="sign-up-form" onSubmit={handleSubmit}>
         <FormInput
@@ -84,12 +87,10 @@ const SignUp = () => {
           onChange={handleChange}
           required
         />
-        <CustomButton type="submit">
-          Sign Up
-        </CustomButton>
+        <CustomButton type="submit">Sign Up</CustomButton>
       </form>
-    </div>
+    </SignUpContainer>
   );
-}
+};
 
 export default SignUp;

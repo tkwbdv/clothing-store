@@ -4,14 +4,21 @@ import { createStructuredSelector } from "reselect";
 
 import { toggleCartHidden } from "../actions/cartActions";
 
-import { ReactComponent as ShoppingIcon } from "../assets/shopping-bag.svg"
 import { selectCartItemsCount } from "../selectors/cartSelectors";
 
+import {
+  CartIconContainer,
+  ShoppingIconContainer,
+  ItemCountContainer
+} from "../styles/components/_CartIcon";
+
 const CartIcon = ({ toggleCartHidden, cartItemCount }) => (
-  <div className="cart-icon" onClick={toggleCartHidden} >
-    <ShoppingIcon className="shopping-icon" />
-    <span className="item-count">{cartItemCount}</span>
-  </div>
+  <CartIconContainer onClick={toggleCartHidden}>
+    <ShoppingIconContainer />
+    <ItemCountContainer className="item-count">
+      {cartItemCount}
+    </ItemCountContainer>
+  </CartIconContainer>
 );
 
 const mapDispatchToProps = dispatch => ({
@@ -22,4 +29,7 @@ const mapStateToProps = createStructuredSelector({
   cartItemCount: selectCartItemsCount
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(CartIcon);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CartIcon);
