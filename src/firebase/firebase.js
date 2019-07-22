@@ -2,6 +2,8 @@ import firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/auth";
 
+// FIREBASE CONFIG
+
 /* const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
@@ -21,6 +23,10 @@ const firebaseConfig = {
   messagingSenderId: "409260899055",
   appId: "1:409260899055:web:956db8723f7642d1"
 };
+
+firebase.initializeApp(firebaseConfig);
+
+// UTILITY FUNCTIONS
 
 const createUserProfileDocument = async (userAuth, additionalData) => {
   if (!userAuth) return;
@@ -47,7 +53,38 @@ const createUserProfileDocument = async (userAuth, additionalData) => {
   return userRef;
 };
 
-firebase.initializeApp(firebaseConfig);
+export const addCollectionAndDocuments = async (
+  collectionKey,
+  objectsToAdd
+) => {
+  const collectionRef = firestore.collection(collectionKey);
+
+  const batch = firestore.batch();
+  objectsToAdd.forEach(obj => {
+    const newDocRef = collectionRef.doc();
+    batch.set(newDocRef, obj);
+  });
+
+  return await batch.commit();
+};
+
+export const convertCollectionsSnapshotToMap = collections => {
+  const transformedCollection = collections.docs.map(doc => {
+    const { title, items } = doc.data();
+
+    return {
+      routeName: encodeURI(title.toLowerCase()),
+      id: doc.id,
+      title,
+      items
+    };
+  });
+
+  return transformedCollection.reduce((acc, collection) => {
+    acc[collection.title.toLowerCase()] = collection;
+    return acc;
+  }, {});
+};
 
 const firestore = firebase.firestore();
 const googleAuthProvider = new firebase.auth.GoogleAuthProvider();

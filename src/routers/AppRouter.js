@@ -49,6 +49,6 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default connect(
-  undefined,
+  null,
   mapDispatchToProps
 )(AppRouter);
