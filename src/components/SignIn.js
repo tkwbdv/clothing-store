@@ -12,7 +12,7 @@ import {
   SignInContainer
 } from "../styles/components/_SignIn";
 
-const SignIn = ({ history, googleSignInStart, emailSignInStart }) => {
+const SignIn = ({ googleSignInStart, emailSignInStart }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
