@@ -1,8 +1,6 @@
 import React, { useEffect } from "react";
-import { Switch, Route } from "react-router-dom";
 import { connect } from "react-redux";
-import { firebase, createUserProfileDocument } from "../firebase/firebase";
-import { setCurrentUser } from "../actions/userActions";
+import { Switch, Route } from "react-router-dom";
 
 import HomePage from "../pages/HomePage";
 import ShopPage from "../pages/ShopPage";
@@ -11,25 +9,12 @@ import CheckoutPage from "../pages/CheckoutPage";
 
 import Header from "../components/Header";
 
-const AppRouter = ({ setCurrentUser }) => {
+import { checkUserSession } from "../actions/userActions";
+
+const AppRouter = ({ checkUserSession }) => {
   useEffect(() => {
-    const unsubscribeFromAuth = firebase
-      .auth()
-      .onAuthStateChanged(async userAuth => {
-        if (userAuth) {
-          const userRef = await createUserProfileDocument(userAuth);
-
-          userRef.onSnapshot(snapshot => {
-            setCurrentUser({
-              id: snapshot.id,
-              ...snapshot.data()
-            });
-          });
-        } else setCurrentUser(null);
-      });
-
-    return () => unsubscribeFromAuth();
-  }, [setCurrentUser]);
+    checkUserSession();
+  }, [checkUserSession]);
 
   return (
     <div>
@@ -45,7 +30,7 @@ const AppRouter = ({ setCurrentUser }) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  setCurrentUser: userData => dispatch(setCurrentUser(userData))
+  checkUserSession: () => dispatch(checkUserSession())
 });
 
 export default connect(

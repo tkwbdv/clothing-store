@@ -1,14 +1,18 @@
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import thunk from "redux-thunk";
+import createSagaMiddleware from "redux-saga";
+
+import rootSaga from "../sagas/rootSaga";
 
 import userReducer from "../reducers/userReducer";
 import cartReducer from "../reducers/cartReducer";
 import directoryReducer from "../reducers/directoryReducer";
 import shopReducer from "../reducers/shopReducer";
 
-const middlewares = [thunk];
+const sagaMiddleware = createSagaMiddleware();
+
+const middlewares = [sagaMiddleware];
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -29,6 +33,8 @@ const store = createStore(
   persistReducer(persistConfig, rootReducer),
   composeEnhancers(applyMiddleware(...middlewares))
 );
+
+sagaMiddleware.run(rootSaga);
 
 const persistor = persistStore(store);
 

@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import { withRouter } from "react-router-dom";
-import { firebase, signInWithGoogle } from "../firebase/firebase";
+import { connect } from "react-redux";
+
+import { googleSignInStart, emailSignInStart } from "../actions/userActions";
+
 import FormInput from "./FormInput";
 import CustomButton from "./CustomButton";
 
@@ -10,26 +12,13 @@ import {
   SignInContainer
 } from "../styles/components/_SignIn";
 
-const SignIn = ({ history }) => {
+const SignIn = ({ history, googleSignInStart, emailSignInStart }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = async e => {
+  const handleSubmit = e => {
     e.preventDefault();
-
-    try {
-      await firebase.auth().signInWithEmailAndPassword(email, password);
-      setEmail("");
-      setPassword("");
-      history.push("/");
-    } catch (error) {
-      console.error("error signing in", error);
-    }
-  };
-
-  const handleSignInWithGoogle = async () => {
-    await signInWithGoogle();
-    history.push("/");
+    emailSignInStart(email, password);
   };
 
   const handleChange = e => {
@@ -61,7 +50,11 @@ const SignIn = ({ history }) => {
         />
         <ButtonsBarContainer>
           <CustomButton type="submit">Sign In</CustomButton>
-          <CustomButton onClick={handleSignInWithGoogle} isGoogleSignIn>
+          <CustomButton
+            type="button"
+            onClick={googleSignInStart}
+            isGoogleSignIn
+          >
             Sign In With Google
           </CustomButton>
         </ButtonsBarContainer>
@@ -70,4 +63,13 @@ const SignIn = ({ history }) => {
   );
 };
 
-export default withRouter(SignIn);
+const mapDispatchToProps = dispatch => ({
+  googleSignInStart: () => dispatch(googleSignInStart()),
+  emailSignInStart: (email, password) =>
+    dispatch(emailSignInStart({ email, password }))
+});
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(SignIn);
