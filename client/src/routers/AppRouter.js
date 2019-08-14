@@ -6,8 +6,9 @@ import HomePage from "../pages/HomePage";
 import ShopPage from "../pages/ShopPage";
 import SignInSignUpPage from "../pages/SignInSignUpPage";
 import CheckoutPage from "../pages/CheckoutPage";
-
 import Header from "../components/Header";
+
+import { GlobalStyle } from "../styles/globalStyles";
 
 import { checkUserSession } from "../actions/userActions";
 
@@ -18,6 +19,7 @@ const AppRouter = ({ checkUserSession }) => {
 
   return (
     <div>
+      <GlobalStyle />
       <Header />
       <Switch>
         <Route path={"/"} component={HomePage} exact />
