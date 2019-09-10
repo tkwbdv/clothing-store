@@ -14,6 +14,8 @@ const firebaseConfig = {
   appId: process.env.REACT_APP_FIREBASE_APP_ID
 };
 
+console.log(firebaseConfig);
+
 // const firebaseConfig = {
 //   apiKey: "AIzaSyBUrIRMFX9Fg_KlqzYu6VLS71anifrtAHg",
 //   authDomain: "clothing-store-7252a.firebaseapp.com",
