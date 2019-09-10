@@ -9,6 +9,8 @@ import * as serviceWorker from "./serviceWorker";
 
 import AppRouter from "./routers/AppRouter";
 
+console.log("This is the staging branch");
+
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
