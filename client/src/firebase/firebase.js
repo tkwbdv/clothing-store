@@ -14,18 +14,6 @@ const firebaseConfig = {
   appId: process.env.REACT_APP_FIREBASE_APP_ID
 };
 
-console.log(firebaseConfig);
-
-// const firebaseConfig = {
-//   apiKey: "AIzaSyBUrIRMFX9Fg_KlqzYu6VLS71anifrtAHg",
-//   authDomain: "clothing-store-7252a.firebaseapp.com",
-//   databaseURL: "https://clothing-store-7252a.firebaseio.com",
-//   projectId: "clothing-store-7252a",
-//   storageBucket: "clothing-store-7252a.appspot.com",
-//   messagingSenderId: "409260899055",
-//   appId: "1:409260899055:web:956db8723f7642d1"
-// };
-
 firebase.initializeApp(firebaseConfig);
 
 // UTILITY FUNCTIONS
